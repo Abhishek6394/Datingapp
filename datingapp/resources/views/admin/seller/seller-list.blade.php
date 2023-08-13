@@ -1,9 +1,9 @@
 @extends('admin.layout.main')
 @push('title')
-Company
+Sellers
 @endpush
 @section('main-section')
-<?php $pagename = 'all-user-list'  ?>
+<?php $pagename = 'all-seller-list'  ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,12 +12,12 @@ Company
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Sellers</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Sellers</li>
             </ol>
           </div>
         </div>
@@ -33,22 +33,21 @@ Company
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">All seller with default features</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              	<a href="{{url('admincon/userForm')}}"><button class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Add User</button></a>
+              	<!-- <a href="{{url('admincon/sellerForm')}}"><button class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Add New Seller</button></a> -->
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Sr. No.</th>
                     <th>Name</th>
                     <th>Mobile</th>
-                    <th>Email</th>
+                    <th>Image</th>
                     <th>Address</th>
                     <th>Gender</th>
-                    <th>Looking For</th>
-                    <th>Status</th>
+                    <th>Price</th>
                     <th>Status</th>
                     <th>Created At</th>
                     <th>Action</th>
@@ -81,13 +80,13 @@ Company
                                                 @endif
                                             </td>
                                             <td>{{ $user['mobile'] }}</td>
-                                            <td>
-                                                 @if( $user['email'] != '')
-                                                {{ $user['email'] }}
+                                               <td>
+                                                @if(isset($user['image']) && !empty($user['image']))
+                                                <img src="{{ $user['image'] }}" height="100px" width="100px">
                                                 @else
-                                                --------------------------
+                                                ---------
                                                 @endif
-                                            </td>
+                                               </td>
                                             <td>
                                                  @if( $user['city'] != '')
                                                 {{ $user['city'] }}
@@ -101,31 +100,31 @@ Company
                                                 @else
                                                 Female
                                                 @endif -->
-                                               {{ $user['gender'] }}
+                                               {{ ucfirst($user['gender']) }}
 
 
                                             </td>
                                              <td>
-                                                 @if( $user['lookingfor'] != '')
-                                                {{ $user['lookingfor'] }}
+                                                 @if( $user['price'] != '')
+                                                ${{ $user['price'] }}
                                                 @else
                                                 --------------------------
                                                 @endif
-                                            </td>
-                                             <td>
+                                            </td> 
+                                             {{-- <td>
                                                  @if( $user['matrital_status'] != '')
                                                 {{ $user['matrital_status'] }}
                                                 @else
                                                 --------------------------
                                                 @endif
-                                            </td>
-                                           
+                                            </td> --}}
+
                                             <td>
-                                            @if($user['status'] == 1) 
+                                            @if($user['status'] == 1)
                                                 <span class="label bg-green">Active</span>
                                             @else
                                                 <span class="label bg-red">Inactive</span>
-                                            @endif  
+                                            @endif
                                             </td>
                                              <td>{{ $user['created_at'] }}</td>
                                             <td>
@@ -134,7 +133,7 @@ Company
                                             </td>
                                         </tr>
                                     <?php } ?>
-            
+
                   </tbody>
                   <tfoot>
                   </tfoot>
@@ -154,13 +153,13 @@ Company
   </div>
 
   <script type="text/javascript">
-        var url = {!! json_encode(url('admincon/userForm')) !!}
+        var url = {!! json_encode(url('admincon/sellerForm')) !!}
         $('#addRow').click(function(){
             location.replace(url);
         });
 
         function edituser(id){
-            var url = '<?php echo url('admincon/userForm') ?>'+'/'+id;
+            var url = '<?php echo url('admincon/sellerForm') ?>'+'/'+id;
             swal({
                   title: `Are you sure you want to edit this record?`,
                   icon: "warning",
@@ -175,7 +174,7 @@ Company
         }
 
         function removeuser(id){
-            var url = '<?php echo url('admincon/userDelete') ?>'+'/'+id;
+            var url = '<?php echo url('admincon/sellerDelete') ?>'+'/'+id;
             swal({
                   title: `Are you sure you want to delete this record?`,
                   text: "If you delete this, it will be gone forever.",
@@ -190,6 +189,6 @@ Company
             });
         }
     </script>
-   
+
 
 @endsection

@@ -24,18 +24,18 @@
                     <div class="log-reg-inner">
                         {{-- <div class="section-header inloginp"> --}}
                         <div class="">
-                            <h2 class="title">Welcome to Ollya</h2>
+                            <h3 class="title">Welcome to xmakelove</h3>
                         </div>
                         <div class="main-content inloginp">
                             <form action="{{route('check.login')}}" method="POST">
                                 @csrf
                                  <div class="form-group">
                                     <label>Mobile*</label>
-                                    <input type="text" class="my-form-control" name="mobile"placeholder="Enter Your Mobile Number"maxlength="10">
+                                    <input type="text" class="my-form-control" name="mobile"placeholder="Enter Your Mobile Number">
                                      @if($errors->has('mobile'))
                                                     <p class="text-danger">{{$errors->first('mobile')}}</p>
                                                     @endif
-                                    </div>                               
+                                    </div>
                                     <div class="form-group">
                                     <label>Password*</label>
                                     <input type="text" class="my-form-control"name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Enter Your Password">

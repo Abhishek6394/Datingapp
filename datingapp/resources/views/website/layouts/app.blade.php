@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title')
-</title>
+    <title>xmakelove</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- site favicon -->
-    <link rel="icon" type="image/png" href="{{ URL::to('public/website/assets/images/favicon.png') }}">
+    {{-- <link rel="icon" type="image/png" href="{{ URL::to('public/website/assets/images/favicon.png') }}"> --}}
+    <link rel="icon" type="image/png" href="{{ URL::to('public/website/assets/images/logo/logo.png') }}">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- All stylesheet and icons css  -->
@@ -19,15 +19,13 @@
     <link rel="stylesheet" href="{{ URL::to('public/website/assets/css/lightcase.css') }}">
     <link rel="stylesheet" href="{{ URL::to('public/website/assets/css/style.css') }}">
     {{-- toastr --}}
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCajbaAg3ejkh48fnl57SvL3_fV8Cl9Wx4&libraries=places"></script>
 </head>
 
 <body>
-    {{-- wrapper --}}
-
-    <!-- preloader start here -->
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -36,35 +34,56 @@
             </div>
         </div>
     </div>
-    <!-- preloader ending here -->
+    {{-- <a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a> --}}
 
+    <!-- Top Bar Start -->
+    @include('website.layouts.topBar')
+    <!-- Nav Bar End -->
 
-    <!-- scrollToTop start here -->
-    <a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
-    <!-- scrollToTop ending here -->
-
-
-    <div class="">
-        <!-- Top Bar Start -->
-        @include('website.layouts.topBar')
-        <!-- Nav Bar End -->
-
-        <!-- Main Wrapper -->
-        @yield('content')
-        <!-- /Main Wrapper -->
-
+    <!-- Main Wrapper -->
+    @yield('content')
+    <!-- /Main Wrapper -->
+    @if (Session::has('sessdata'))
         <!-- Footer Start -->
         @include('website.layouts.footer')
         <!-- Footer End -->
+    @endif
 
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    </div>
+
+    {{-- toastr js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options.timeOut = 10000;
+            @if (Session::has('error'))
+                toastr.error('{{ Session::get('error') }}');
+            @elseif (Session::has('success'))
+                toastr.success('{{ Session::get('success') }}');
+            @elseif (Session::has('warning'))
+                toastr.warning('{{ Session::get('warning') }}');
+            @endif
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var autocomplete;
+            var id = "location";
+
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById(id), {
+                    types: ["geocode"],
+                }
+            );
+        });
+    </script>
+    {{-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> --}}
+
     <!-- All Needed JS -->
     <script src="{{ URL::to('public/website/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ URL::to('public/website/assets/js/vendor/modernizr-3.11.2.min.js') }}"></script>
     <script src="{{ URL::to('public/website/assets/js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ URL::to('public/website/assets/js/swiper.min.js') }}"></script>
-    <!-- <script src="{{ URL::to('public/website/assets/js/all.min.js') }}"></script> -->
+    <!-- <script src="{{-- URL::to('public/website/assets/js/all.min.js') --}}"></script> -->
     <script src="{{ URL::to('public/website/assets/js/wow.js') }}"></script>
     <script src="{{ URL::to('public/website/assets/js/counterup.js') }}"></script>
     <script src="{{ URL::to('public/website/assets/js/jquery.countdown.min.js') }}"></script>
@@ -76,7 +95,7 @@
 
 
     <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-    <script>
+    {{-- <script>
         window.ga = function() {
             ga.q.push(arguments)
         };
@@ -87,9 +106,7 @@
         ga('set', 'transport', 'beacon');
         ga('send', 'pageview')
     </script>
-    <script src="../../../../www.google-analytics.com/analytics.js" async></script>
+    <script src="../../../../www.google-analytics.com/analytics.js" async></script> --}}
 </body>
-
-<!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Jul 2023 07:10:53 GMT -->
 
 </html>

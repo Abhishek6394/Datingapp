@@ -67,33 +67,15 @@ class AdminUserController extends Controller
                 date_default_timezone_set('Asia/Kolkata');
                 // Prints the day, date, month, year, time, AM or PM
                 $params['created_date'] = date("j M Y h:i A"); 
-                $this->appRepository->savedata($params);
+                // $this->appRepository->savedata($params);
                 return redirect()->to('admincon/allusers')->with('success','New user Added successfully!');
             }        
         }
 
-    public function delete(Request $request){
-
-        // echo "ghjkl";
-        // die('========');
-      // $user = User::select('*')->where('id', $request->id)->get()->first();
-             
-            $params = $request->all();
-            unset($params['_token']);
-            $user = User::select('*')->where('id', $request->id)->get()->first();
-            $params['id'] = $request->id;
-             $id = $request->id;
-             // print_r($id);
-             //  die('ooooooo');
-             unset($params['id']);
+    public function delete($id){
                              
-          User::where('id', $request->id)->delete($params);
-
-          //    print_r($d);
-          // die('========');
-       // DB::table('users')->whereIn('id', $request->id)->delete();
-        //DB::table('users')->where('id', $request->id)->delete($id);
-        return back()->with('success','Successfully deleted.!!');
+          User::where('id', base64_decode($id))->delete();
+          return back()->with('success','Successfully deleted.!!');
     }
 
 }

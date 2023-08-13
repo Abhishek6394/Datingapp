@@ -14,12 +14,12 @@
           <img src="{{ URL::to('public/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="{{url('admincon/dashboard')}}" class="d-block">Alexander Pierce</a>
         </div>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="{{url('admincon/dashboard')}}" class="brand-link">
       <img src="{{ url('public/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Admin Panel</span>
     </a>
@@ -32,7 +32,7 @@
           <img src="{{ url('public/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="" class="d-block">Admin</a>
+          <a href="{{url('admincon/dashboard')}}" class="d-block">Admin</a>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href=""  class="<?php if($pagename == 'dashboard'){ echo "nav-link active";
+            <a href="{{url('admincon/dashboard')}}"  class="<?php if($pagename == 'dashboard'){ echo "nav-link active";
             }
             else
             {

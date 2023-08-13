@@ -37,14 +37,14 @@ Company
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              	<a href="{{url('admincon/userForm')}}"><button class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Add User</button></a>
+              	<!-- <a href="{{url('admincon/userForm')}}"><button class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Add User</button></a> -->
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Sr. No.</th>
                     <th>Name</th>
                     <th>Mobile</th>
-                    <th>Email</th>
+                    <!-- <th>Image</th> -->
                     <th>Address</th>
                     <th>Gender</th>
                     <th>Looking For</th>
@@ -70,13 +70,7 @@ Company
                                                 @endif
                                             </td>
                                             <td>{{ $user['mobile'] }}</td>
-                                            <td>
-                                                 @if( $user['email'] != '')
-                                                {{ $user['email'] }}
-                                                @else
-                                                --------------------------
-                                                @endif
-                                            </td>
+                                            <!-- <td></td> -->
                                             <td>
                                                  @if( $user['city'] != '')
                                                 {{ $user['city'] }}
